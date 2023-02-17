@@ -13,6 +13,5 @@ class CheckInsTableSeeder extends Seeder
     public function run(): void
     {
         CheckIn::factory(90)->create();
-
     }
 }
