@@ -1,10 +1,9 @@
 <template>
     <v-card
-        class="ma-2"
-        title="Employs">
-        <v-card-text>
-
-        </v-card-text>
+        class="ma-2">
+        <v-card-title>
+            Employs <EmployeeCreate/>
+        </v-card-title>
         <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
@@ -31,8 +30,9 @@
 </template>
 
 <script>
-
+import EmployeeCreate from "./employee/create.vue"
 export default {
+    components: {EmployeeCreate},
     data() {
         return {
             search: '',
