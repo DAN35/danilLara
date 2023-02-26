@@ -14,7 +14,7 @@
         </template>
         <v-card>
             <v-card-title class="text-h5">
-                Add a new Server
+                Add a new Employee
             </v-card-title>
             <v-card-text>
                 <v-form ref="form">
@@ -38,12 +38,14 @@
                         label="Second Name"
                     ></v-text-field>
 
-                    <v-text-field
+                    <v-autocomplete
                         v-model="formData.card_id"
                         :rules="cardIdRules"
                         label="Card ID"
-                        required
-                    ></v-text-field>
+                        :items="cardItems"
+                        item-title="card_id"
+                        item-value="card_id"
+                    ></v-autocomplete>
 
                     <v-text-field
                         v-model="formData.work_time_start"
@@ -97,6 +99,7 @@ export default {
                 work_time_start: '',
                 work_time_end: '',
             },
+            cardItems: [],
         }
     },
     computed: {
@@ -119,7 +122,20 @@ export default {
             ];
         },
     },
+    mounted() {
+        this.loadFormData();
+    },
     methods: {
+        loadFormData() {
+            this.$http.get('api/employee/create')
+                .then((response) => {
+                    this.cardItems = response.data;
+                    console.log('Form data saved successfully', response);
+                })
+                .catch((error) => {
+                    console.log('Error saving form data: ', error);
+                });
+        },
         async validate() {
             const {valid} = await this.$refs.form.validate();
         },
