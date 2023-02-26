@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\CheckIn;
 use App\Models\Employee;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -22,9 +22,15 @@ class EmployeeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create(): JsonResponse
     {
-        //
+        $card_ids = CheckIn::select('card_id')
+            ->whereDoesntHave('employee')
+            ->groupBy('card_id')
+            ->orderByDesc('check')
+            ->get();
+
+        return  response()->json($card_ids);
     }
 
     /**

@@ -5,9 +5,19 @@ Run mirgration and seeders
 composer install
 npm install
 
-php artisan migrate --seed
-php artisan migrate:refresh --seed
+// DB up + seeded
+php artisan migrate --seed 
+
+// DB down, DB up + seeded
+php artisan migrate:refresh --seed 
+
+
+// seeders location > database/seeders
+// DB seed --class DatabaseSeader
 php artisan db:seed
+
+// php artisan db:seed --class [ClassSeader]
+php artisan db:seed --class CustomCheckInsSeeder
 ```
 
 
@@ -29,3 +39,5 @@ npm run build
 
 **Login**: admin@gmail.com \
 **Password**: 12345678
+
+

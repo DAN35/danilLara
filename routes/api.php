@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
-Route::apiResources([
+Route::resources([
     'checkin' => CheckInController::class,
     'server' => ServerController::class,
     'employee' => EmployeeController::class,
